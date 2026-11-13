@@ -1,0 +1,3 @@
+import React from 'react';
+import {useNavigate} from 'react-router-dom'; import PrimaryButton from '../components/PrimaryButton';
+export default function Welcome(){const nav=useNavigate(); return <div className="onboarding"><div className="onboard-logo">maxim</div><div className="onboard-art"><div className="sun"></div><div className="city"></div><div className="scooter">🏍️</div></div><div className="onboard-copy"><span className="eyebrow">MAXIM REDESIGN</span><h1>Perjalanan dan kebutuhanmu, lebih mudah.</h1><p>Temukan layanan, promo, dan booking dalam pengalaman yang lebih sederhana.</p><PrimaryButton onClick={()=>nav('/login')}>Mulai</PrimaryButton></div></div>}

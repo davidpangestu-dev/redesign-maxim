@@ -1,0 +1,3 @@
+import React from 'react';
+import Header from '../components/Header'; import ActivityCard from '../components/ActivityCard'; import {activity} from '../data/mockData'; import {useNavigate} from 'react-router-dom';
+export default function Activity(){const nav=useNavigate(); return <div className="page"><Header title="Aktivitas"/><div className="tabs">{['Semua','Perjalanan','Food','Delivery'].map((x,i)=><button className={i===0?'tab active':'tab'} key={x}>{x}</button>)}</div><div className="stack">{activity.map((x,i)=><ActivityCard key={i} item={x} onClick={()=>nav(x.type==='Bike'?'/bike/completed':x.type==='Food'?'/food/tracking':'/delivery')}/>)}</div></div>}
