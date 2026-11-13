@@ -13,7 +13,7 @@ export default function Services() {
       <h2 className="section-title">Transportasi</h2>
       <div className="stack">
         {services.slice(0, 2).map((s) => (
-          <ServiceCard key={s.id} service={s} onClick={() => nav(s.path)} />
+          <ServiceCard key={s.id} service={s} onClick={() => nav(s.id === "car" ? "/car" : s.path)} />
         ))}
       </div>
       <h2 className="section-title">Pengiriman</h2>

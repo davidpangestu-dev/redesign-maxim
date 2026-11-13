@@ -8,7 +8,7 @@ export default function FoodCart({ cart, setCart }) {
   const items = menuItems.filter((i) => cart[i.id]);
   const change = (id, d) => setCart((c) => ({ ...c, [id]: Math.max(0, (c[id] || 0) + d) }));
   const subtotal = items.reduce((s, i) => s + i.price * cart[i.id], 0);
-  const delivery = 7000;
+  const delivery = items.length > 0 ? 7000 : 0;
   const total = subtotal + delivery;
   return (
     <div className="page">
@@ -24,9 +24,9 @@ export default function FoodCart({ cart, setCart }) {
                   <small>Rp{i.price.toLocaleString("id-ID")}</small>
                 </div>
                 <div className="qty">
-                  <button onClick={() => change(i.id, -1)}>−</button>
+                  <button onClick={() => change(i.id, -1)} aria-label={`Kurangi ${i.name}`}>−</button>
                   <span>{cart[i.id]}</span>
-                  <button onClick={() => change(i.id, 1)}>+</button>
+                  <button onClick={() => change(i.id, 1)} aria-label={`Tambah ${i.name}`}>+</button>
                 </div>
               </div>
             ))}
@@ -36,7 +36,7 @@ export default function FoodCart({ cart, setCart }) {
               Subtotal <strong>Rp{subtotal.toLocaleString("id-ID")}</strong>
             </div>
             <div>
-              Delivery Fee <strong>Rp7.000</strong>
+              Ongkir <strong>Rp{delivery.toLocaleString("id-ID")}</strong>
             </div>
             <div className="fare-total">
               Total <strong>Rp{total.toLocaleString("id-ID")}</strong>
@@ -49,6 +49,7 @@ export default function FoodCart({ cart, setCart }) {
           <div className="empty-illustration">🛒</div>
           <h3>Keranjang masih kosong</h3>
           <p>Tambahkan makanan favoritmu.</p>
+          <PrimaryButton onClick={() => nav("/food")}>Jelajahi menu</PrimaryButton>
         </div>
       )}
     </div>

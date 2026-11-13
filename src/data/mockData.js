@@ -1,6 +1,6 @@
 export const services = [
   { id: "bike", name: "Bike", subtitle: "Cepat & hemat", icon: "bike", path: "/bike" },
-  { id: "car", name: "Car", subtitle: "Nyaman bepergian", icon: "car", path: "/services" },
+  { id: "car", name: "Car", subtitle: "Nyaman bepergian", icon: "car", path: "/car" },
   { id: "delivery", name: "Delivery", subtitle: "Kirim barang", icon: "package", path: "/delivery" },
   { id: "food", name: "Food", subtitle: "Pesan makanan", icon: "utensils", path: "/food" },
   { id: "mart", name: "Mart", subtitle: "Belanja kebutuhan", icon: "shopping", path: "/services" },
@@ -18,9 +18,9 @@ export const restaurants = [
 ];
 
 export const menuItems = [
-  { id: "nasi", name: "Nasi Ayam Crispy", description: "nasi, ayam crispy, sambal", price: 18000, emoji: "🍗" },
-  { id: "burger", name: "Burger Special", description: "Burger lezat dengan saus khas", price: 22000, emoji: "🍔" },
-  { id: "tea", name: "Es Teh", description: "Segar dan dingin", price: 5000, emoji: "🧋" },
+  { id: "nasi", name: "Nasi Ayam Crispy", description: "Nasi hangat, ayam crispy, dan sambal pilihan.", price: 18000, emoji: "🍗", category: "Makanan", rating: "4.8" },
+  { id: "burger", name: "Burger Special", description: "Burger juicy dengan sayuran segar dan saus khas.", price: 22000, emoji: "🍔", category: "Makanan", rating: "4.7" },
+  { id: "tea", name: "Es Teh", description: "Teh manis segar, disajikan dingin.", price: 5000, emoji: "🧋", category: "Minuman", rating: "4.9" },
 ];
 
 export const activity = [

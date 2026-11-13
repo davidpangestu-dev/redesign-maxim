@@ -21,7 +21,9 @@ Buka URL Vite yang muncul di terminal.
 ## Demo flow
 - `/welcome` → `/login` → `/otp` → `/profile-setup` → `/`
 - `/` → `/bike` → `/bike/confirmation` → `/bike/searching` → `/bike/driver` → `/bike/trip` → `/bike/completed`
-- `/` → `/food` → `/food/restaurant` → `/food/cart` → `/food/checkout` → `/food/tracking`
+- `/` → `/car` → `/car/confirmation` → `/car/searching` → `/car/driver` → `/car/trip` → `/car/completed`
+- `/` → `/food` → `/food/item/nasi` → `/food/cart` → `/food/checkout` → `/food/tracking`
+- `/food` → `/food/restaurant` → detail menu → `/food/cart`
 - `/` → `/delivery`
 
 ## Notes

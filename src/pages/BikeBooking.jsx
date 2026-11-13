@@ -8,14 +8,25 @@ import PaymentCard from "../components/PaymentCard";
 import FareSummary from "../components/FareSummary";
 import PrimaryButton from "../components/PrimaryButton";
 import Modal from "../components/Modal";
-export default function BikeBooking() {
+import { getRidePricing, getRideSelection, rideOptions } from "../data/rideOptions";
+export default function BikeBooking({ serviceType = "bike", selection, onSelectionChange }) {
   const nav = useNavigate();
-  const [vehicle, setVehicle] = useState("Bike");
-  const [promo, setPromo] = useState(true);
   const [payment, setPayment] = useState(false);
+  const options = rideOptions[serviceType] || rideOptions.bike;
+  const selected = getRideSelection(serviceType, selection);
+  const pricing = getRidePricing(selected);
+  const serviceName = serviceType === "car" ? "Car" : "Bike";
+
+  const selectOption = (option) => {
+    onSelectionChange({
+      ...option,
+      promoApplied: serviceType === "bike" && selected.promoApplied,
+    });
+  };
+
   return (
     <div className="page flush">
-      <Header title="Pesan Bike" back />
+      <Header title={`Pesan ${serviceName}`} back />
       <MapMock />
       <div className="sheet">
         <div className="location-card">
@@ -34,20 +45,34 @@ export default function BikeBooking() {
         </div>
         <h3 className="section-title">Pilih kendaraan</h3>
         <div className="stack">
-          <VehicleCard type="Bike" selected={vehicle === "Bike"} onClick={() => setVehicle("Bike")} />
-          <VehicleCard type="Car" selected={vehicle === "Car"} onClick={() => setVehicle("Car")} />
+          {options.map((option) => (
+            <VehicleCard
+              key={option.id}
+              title={option.name}
+              subtitle={option.subtitle}
+              price={getRidePricing({ ...option, promoApplied: selected.promoApplied }).total}
+              serviceType={serviceType}
+              selected={selected.id === option.id}
+              onClick={() => selectOption(option)}
+            />
+          ))}
         </div>
-        <button className={"choice-row " + (promo ? "selected" : "")} onClick={() => setPromo(!promo)}>
-          <span>🏷️</span>
-          <span>
-            <strong>Hemat Rp5.000</strong>
-            <small>Promo perjalanan</small>
-          </span>
-          <b>{promo ? "✓" : ""}</b>
-        </button>
+        {serviceType === "bike" && (
+          <button
+            className={"choice-row " + (selected.promoApplied ? "selected" : "")}
+            onClick={() => onSelectionChange({ ...selected, promoApplied: !selected.promoApplied })}
+          >
+            <span>🏷️</span>
+            <span>
+              <strong>Hemat Rp{selected.promoDiscount.toLocaleString("id-ID")}</strong>
+              <small>Promo perjalanan</small>
+            </span>
+            <b>{selected.promoApplied ? "✓" : ""}</b>
+          </button>
+        )}
         <PaymentCard onClick={() => setPayment(true)} />
-        <FareSummary discount={promo ? 5000 : 0} total={promo ? 7000 : 12000} />
-        <PrimaryButton onClick={() => nav("/bike/confirmation")}>Pesan Sekarang</PrimaryButton>
+        <FareSummary fare={pricing.fare} discount={pricing.discount} total={pricing.total} />
+        <PrimaryButton onClick={() => nav(`/${serviceType}/confirmation`)}>Pesan Sekarang</PrimaryButton>
       </div>
       {payment && (
         <Modal title="Pilih pembayaran" onClose={() => setPayment(false)}>

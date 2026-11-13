@@ -3,16 +3,19 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import FareSummary from "../components/FareSummary";
 import PrimaryButton from "../components/PrimaryButton";
-export default function BikeConfirmation() {
+import { getRidePricing, getRideSelection } from "../data/rideOptions";
+export default function BikeConfirmation({ serviceType = "bike", selection }) {
   const nav = useNavigate();
+  const selected = getRideSelection(serviceType, selection);
+  const pricing = getRidePricing(selected);
   return (
     <div className="page">
       <Header title="Konfirmasi Pesanan" back />
       <div className="confirm-card">
-        <span className="service-icon large">🏍️</span>
+        <span className="service-icon large">{serviceType === "car" ? "🚘" : "🏍️"}</span>
         <div>
-          <h2>Bike</h2>
-          <p>Cepat & hemat</p>
+          <h2>{selected.name}</h2>
+          <p>{selected.subtitle}</p>
         </div>
       </div>
       <div className="route-card">
@@ -33,15 +36,13 @@ export default function BikeConfirmation() {
         </div>
       </div>
       <div className="info-list">
-        <div>
-          Promo <strong>Hemat Rp5.000</strong>
-        </div>
+        {pricing.discount > 0 && <div>Promo <strong>Hemat Rp{pricing.discount.toLocaleString("id-ID")}</strong></div>}
         <div>
           Pembayaran <strong>Tunai</strong>
         </div>
       </div>
-      <FareSummary />
-      <PrimaryButton onClick={() => nav("/bike/searching")}>Konfirmasi Pesanan</PrimaryButton>
+      <FareSummary fare={pricing.fare} discount={pricing.discount} total={pricing.total} />
+      <PrimaryButton onClick={() => nav(`/${serviceType}/searching`)}>Konfirmasi Pesanan</PrimaryButton>
     </div>
   );
 }

@@ -58,7 +58,7 @@ export default function Home() {
             Lihat semua <ChevronRight size={16} />
           </button>
         </div>
-        <div className="promo-scroll">
+        <div className="promo-scroll home-promo-scroll">
           {promos.slice(0, 2).map((p) => (
             <PromoCard key={p.id} promo={p} onClick={() => nav("/promos")} />
           ))}
