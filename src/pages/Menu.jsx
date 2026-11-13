@@ -1,4 +1,38 @@
-import React from 'react';
-import Header from '../components/Header'; import {User, CreditCard, Tag, HelpCircle, Settings, ChevronRight} from 'lucide-react'; import {useNavigate} from 'react-router-dom';
-const items=[['Profil',User,'/profile'],['Pembayaran',CreditCard,null],['Promo',Tag,'/promos'],['Bantuan',HelpCircle,null],['Pengaturan',Settings,null]];
-export default function Menu(){const nav=useNavigate(); return <div className="page"><Header title="Menu"/><button className="profile-card" onClick={()=>nav('/profile')}><div className="profile-avatar">D</div><div><h2>David</h2><p>Edit Profil</p></div><ChevronRight/></button><div className="menu-list">{items.map(([name,Icon,path])=><button className="menu-row" key={name} onClick={()=>path?nav(path):null}><span className="menu-icon"><Icon size={19}/></span><strong>{name}</strong><ChevronRight size={17}/></button>)}</div></div>}
+import React from "react";
+import Header from "../components/Header";
+import { User, CreditCard, Tag, HelpCircle, Settings, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+const items = [
+  ["Profil", User, "/profile"],
+  ["Pembayaran", CreditCard, null],
+  ["Promo", Tag, "/promos"],
+  ["Bantuan", HelpCircle, null],
+  ["Pengaturan", Settings, null],
+];
+export default function Menu() {
+  const nav = useNavigate();
+  return (
+    <div className="page">
+      <Header title="Menu" />
+      <button className="profile-card" onClick={() => nav("/profile")}>
+        <div className="profile-avatar">D</div>
+        <div>
+          <h2>David</h2>
+          <p>Edit Profil</p>
+        </div>
+        <ChevronRight />
+      </button>
+      <div className="menu-list">
+        {items.map(([name, Icon, path]) => (
+          <button className="menu-row" key={name} onClick={() => (path ? nav(path) : null)}>
+            <span className="menu-icon">
+              <Icon size={19} />
+            </span>
+            <strong>{name}</strong>
+            <ChevronRight size={17} />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

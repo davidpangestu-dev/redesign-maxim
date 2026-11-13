@@ -1,3 +1,66 @@
-import React from 'react';
-import {useState} from 'react'; import {useNavigate} from 'react-router-dom'; import Header from '../components/Header'; import MapMock from '../components/MapMock'; import VehicleCard from '../components/VehicleCard'; import PaymentCard from '../components/PaymentCard'; import FareSummary from '../components/FareSummary'; import PrimaryButton from '../components/PrimaryButton'; import Modal from '../components/Modal';
-export default function BikeBooking(){const nav=useNavigate(); const [vehicle,setVehicle]=useState('Bike'); const [promo,setPromo]=useState(true); const [payment,setPayment]=useState(false); return <div className="page flush"><Header title="Pesan Bike" back/><MapMock/><div className="sheet"><div className="location-card"><div><small>Lokasi jemput</small><strong><span className="dot green"></span> Lokasi saya</strong></div><div><small>Tujuan</small><strong><span className="dot red"></span> Masukkan tujuan perjalanan</strong></div></div><h3 className="section-title">Pilih kendaraan</h3><div className="stack"><VehicleCard type="Bike" selected={vehicle==='Bike'} onClick={()=>setVehicle('Bike')}/><VehicleCard type="Car" selected={vehicle==='Car'} onClick={()=>setVehicle('Car')}/></div><button className={'choice-row '+(promo?'selected':'')} onClick={()=>setPromo(!promo)}><span>🏷️</span><span><strong>Hemat Rp5.000</strong><small>Promo perjalanan</small></span><b>{promo?'✓':''}</b></button><PaymentCard onClick={()=>setPayment(true)}/><FareSummary discount={promo?5000:0} total={promo?7000:12000}/><PrimaryButton onClick={()=>nav('/bike/confirmation')}>Pesan Sekarang</PrimaryButton></div>{payment&&<Modal title="Pilih pembayaran" onClose={()=>setPayment(false)}><div className="stack"><button className="modal-option selected" onClick={()=>setPayment(false)}>Tunai <span>✓</span></button><button className="modal-option" onClick={()=>setPayment(false)}>Saldo Maxim</button></div></Modal>}</div>}
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import MapMock from "../components/MapMock";
+import VehicleCard from "../components/VehicleCard";
+import PaymentCard from "../components/PaymentCard";
+import FareSummary from "../components/FareSummary";
+import PrimaryButton from "../components/PrimaryButton";
+import Modal from "../components/Modal";
+export default function BikeBooking() {
+  const nav = useNavigate();
+  const [vehicle, setVehicle] = useState("Bike");
+  const [promo, setPromo] = useState(true);
+  const [payment, setPayment] = useState(false);
+  return (
+    <div className="page flush">
+      <Header title="Pesan Bike" back />
+      <MapMock />
+      <div className="sheet">
+        <div className="location-card">
+          <div>
+            <small>Lokasi jemput</small>
+            <strong>
+              <span className="dot green"></span> Lokasi saya
+            </strong>
+          </div>
+          <div>
+            <small>Tujuan</small>
+            <strong>
+              <span className="dot red"></span> Masukkan tujuan perjalanan
+            </strong>
+          </div>
+        </div>
+        <h3 className="section-title">Pilih kendaraan</h3>
+        <div className="stack">
+          <VehicleCard type="Bike" selected={vehicle === "Bike"} onClick={() => setVehicle("Bike")} />
+          <VehicleCard type="Car" selected={vehicle === "Car"} onClick={() => setVehicle("Car")} />
+        </div>
+        <button className={"choice-row " + (promo ? "selected" : "")} onClick={() => setPromo(!promo)}>
+          <span>🏷️</span>
+          <span>
+            <strong>Hemat Rp5.000</strong>
+            <small>Promo perjalanan</small>
+          </span>
+          <b>{promo ? "✓" : ""}</b>
+        </button>
+        <PaymentCard onClick={() => setPayment(true)} />
+        <FareSummary discount={promo ? 5000 : 0} total={promo ? 7000 : 12000} />
+        <PrimaryButton onClick={() => nav("/bike/confirmation")}>Pesan Sekarang</PrimaryButton>
+      </div>
+      {payment && (
+        <Modal title="Pilih pembayaran" onClose={() => setPayment(false)}>
+          <div className="stack">
+            <button className="modal-option selected" onClick={() => setPayment(false)}>
+              Tunai <span>✓</span>
+            </button>
+            <button className="modal-option" onClick={() => setPayment(false)}>
+              Saldo Maxim
+            </button>
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}

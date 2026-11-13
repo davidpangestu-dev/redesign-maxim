@@ -1,3 +1,20 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom'; import Header from '../components/Header'; import MapMock from '../components/MapMock'; import LoadingState from '../components/LoadingState'; import SecondaryButton from '../components/SecondaryButton';
-export default function BikeSearching(){const nav=useNavigate(); return <div className="page flush"><Header title="Mencari driver..." back/><MapMock/><div className="searching-panel"><LoadingState label="Mencari driver..."/><p>Mohon tunggu sebentar</p><SecondaryButton onClick={()=>nav('/bike/driver')}>Simulasikan Driver Ditemukan</SecondaryButton></div></div>}
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import MapMock from "../components/MapMock";
+import LoadingState from "../components/LoadingState";
+import SecondaryButton from "../components/SecondaryButton";
+export default function BikeSearching() {
+  const nav = useNavigate();
+  return (
+    <div className="page flush">
+      <Header title="Mencari driver..." back />
+      <MapMock />
+      <div className="searching-panel">
+        <LoadingState label="Mencari driver..." />
+        <p>Mohon tunggu sebentar</p>
+        <SecondaryButton onClick={() => nav("/bike/driver")}>Simulasikan Driver Ditemukan</SecondaryButton>
+      </div>
+    </div>
+  );
+}

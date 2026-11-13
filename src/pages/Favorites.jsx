@@ -1,3 +1,14 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom'; import Header from '../components/Header'; import EmptyState from '../components/EmptyState'; import PrimaryButton from '../components/PrimaryButton';
-export default function Favorites(){const nav=useNavigate(); return <div className="page"><Header title="Favorit"/><EmptyState title="Belum ada favorit" description="Tempat atau layanan yang kamu simpan akan muncul di sini." action={<PrimaryButton onClick={()=>nav('/services')}>Jelajahi layanan</PrimaryButton>}/></div>}
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import EmptyState from "../components/EmptyState";
+import PrimaryButton from "../components/PrimaryButton";
+export default function Favorites() {
+  const nav = useNavigate();
+  return (
+    <div className="page">
+      <Header title="Favorit" />
+      <EmptyState title="Belum ada favorit" description="Tempat atau layanan yang kamu simpan akan muncul di sini." action={<PrimaryButton onClick={() => nav("/services")}>Jelajahi layanan</PrimaryButton>} />
+    </div>
+  );
+}
